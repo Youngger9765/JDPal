@@ -8,7 +8,6 @@
 </head>
 <body>
 
-<h2>管理後台</h2>
 <% if current_user %>
   <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
   <%= link_to('修改密碼', edit_registration_path(:user)) %>
@@ -22,7 +21,14 @@
 <% end %>
 
 <br>
-<%= yield %>
+
+<div class="container">
+  <h1>後台管理</h1>
+  <%=link_to "管理使用者", admin_users_path, :class => "btn btn-info btn-lg"%>
+  <br>
+  <%= yield %>
+</div>
+
 
 </body>
 </html>

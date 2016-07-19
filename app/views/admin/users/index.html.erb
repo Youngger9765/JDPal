@@ -1,16 +1,20 @@
 Users
+<div class="container">
+<div class="row">
+  <div class="col-md-10">
+    <table class="table">
+      <tr>
+        <td>id</td>
+        <td>email</td>
+      </tr>
+      <% @users.each do |user|%>
+        <tr>
+          <td><%= user.id %></td>
+          <td><%= user.email %></td>
+        </tr>
+      <% end %>
+    </table> 
+  </div>
+</div>
+</div>
 
-
-<table class="table">
-  <tr>
-    <td>id</td>
-    <td>email</td>
-  </tr>
-  <% @users.each do |user|%>
-    <tr>
-      <td><%= user.id %></td>
-      <td><%= user.email %></td>
-    </tr>
-  <% end %>
-  
-</table>

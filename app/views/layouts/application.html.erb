@@ -20,8 +20,22 @@
 <%= current_user.email %>
 <% end %>
 
+
 <br>
-<%= yield %>
+  <%if flash[:notice].present? %>
+    <div class="alert alert-success" role="alert">
+      <%= flash[:notice] %>
+    </div>
+  <%end%>
+  <%if flash[:alert].present? %>
+    <div class="alert alert-danger" role="alert">
+      <%= flash[:alert] %>
+    </div>
+  <%end%>
+
+  <div class="container">
+    <%= yield %>
+  </div>
 
 </body>
 </html>
