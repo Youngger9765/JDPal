@@ -16,6 +16,11 @@
   <%= link_to('登入', new_session_path(:user)) %>
 <% end %>
 
+<% if current_user %>
+<%= current_user.email %>
+<% end %>
+
+<br>
 <%= yield %>
 
 </body>
