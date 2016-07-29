@@ -30,7 +30,11 @@
   <% end %>
 
   <% if current_user %>
-  <%= current_user.email %>
+    <div class="pull-right" style="font-size: 20px;">
+      <%= image_tag("#{current_user.head_shot}", size: "40") %>
+      <%= current_user.name %>
+    </div>
+  
   <% end %>
     <%= yield %>
   </div>
