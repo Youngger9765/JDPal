@@ -11,15 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729151412) do
+ActiveRecord::Schema.define(version: 20160730025726) do
 
   create_table "users", force: :cascade do |t|
-    t.string   "email",                  limit: 255, default: "", null: false
-    t.string   "encrypted_password",     limit: 255, default: "", null: false
+    t.string   "email",                  limit: 255,   default: "", null: false
+    t.string   "encrypted_password",     limit: 255,   default: "", null: false
     t.string   "reset_password_token",   limit: 255
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          limit: 4,   default: 0,  null: false
+    t.integer  "sign_in_count",          limit: 4,     default: 0,  null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip",     limit: 255
@@ -28,14 +28,20 @@ ActiveRecord::Schema.define(version: 20160729151412) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string   "unconfirmed_email",      limit: 255
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.datetime "created_at",                                        null: false
+    t.datetime "updated_at",                                        null: false
     t.string   "fb_uid",                 limit: 255
     t.string   "fb_token",               limit: 255
     t.string   "name",                   limit: 255
     t.string   "nick_name",              limit: 255
     t.string   "facebook_url",           limit: 255
     t.string   "head_shot",              limit: 255
+    t.text     "description_English",    limit: 65535
+    t.text     "description_Chinese",    limit: 65535
+    t.string   "profession",             limit: 255
+    t.string   "availability",           limit: 255
+    t.string   "travel_footprints",      limit: 255
+    t.string   "familiar_areas",         limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

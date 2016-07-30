@@ -1,0 +1,22 @@
+Users
+<div class="container">
+<div class="row">
+  <div class="col-md-10">
+    <table class="table">
+      <tr>
+        <td>head_shot</td>
+        <td>name</td>
+        <td>email</td>
+
+      </tr>
+      <% @users.each do |user|%>
+        <tr>
+          <td><%= image_tag("#{user.head_shot}") %></td>
+          <td><%= link_to user.name, user_path(user)%></td>
+          <td><%= user.email %></td>
+        </tr>
+      <% end %>
+    </table> 
+  </div>
+</div>
+</div>

@@ -1,0 +1,55 @@
+<div class="col-md-12 ">
+  <% if current_user == @user%>
+    <div><%= link_to "edit", edit_user_path(@user)%></div>
+  <% end %>
+
+  <%= link_to user_path(@user), class: "col-md-12" do%>
+    <%= image_tag (@user.head_shot), style: "width: 80px; height: 80px; display: inline; border-radius: 10px; position: relative; right: 10px; margin:10px;"%>
+  <%end%>
+
+  <hr>
+  <div id="user_about" class="col-md-6 col-md-offset-3">
+    <h4>About <%= @user.name%></h4>
+    <p><%= simple_format(@user.description_English) %></p>
+    <p><%= simple_format(@user.description_Chinese) %></p>
+
+    <hr>
+
+    <div id="user_detail">
+      <div class="row">
+        <p class="col-md-4">Interests</p>
+        <p class="col-md-8"></p>
+        <hr>
+      </div>
+      <div class="row">
+        <p class="col-md-4">Profession</p>
+        <p class="col-md-8"><%= @user.profession%></p>
+        <hr>
+      </div>
+      <div class="row">
+        <p class="col-md-4">Languages</p>
+        <p class="col-md-8"></p>
+        <hr>
+      </div>
+      <div class="row">
+        <p class="col-md-4">familiar_areas</p>
+        <p class="col-md-8"><%= @user.familiar_areas%></p>
+        <hr>
+      </div>
+      <div class="row">
+        <p class="col-md-4">availability</p>
+        <p class="col-md-8"><%= @user.availability%></p>
+        <hr>
+      </div>
+      <div class="row">
+        <p class="col-md-4">travel_footprints</p>
+        <p class="col-md-8"><%= @user.travel_footprints%></p>
+        <hr>
+      </div>
+      
+      
+    </div>
+  </div>
+    
+
+</div>
