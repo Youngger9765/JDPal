@@ -18,7 +18,11 @@
     <div id="user_detail">
       <div class="row">
         <p class="col-md-4">Interests</p>
-        <p class="col-md-8"></p>
+        <p class="col-md-8">
+          <% @user.interests.each do |i|%>
+            <%= i.name%>/
+          <% end %>
+        </p>
         <hr>
       </div>
       <div class="row">

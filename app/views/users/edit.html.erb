@@ -19,7 +19,8 @@
     <%= f.text_field :availability, class: 'form-control' %>
 
     <div class="form-group user-checklist">
-        <h3>Interest</h3> 
+        <h3>Areas of Interests <span style="color: red;">*</span></h3> 
+        <p>興趣領域</p>
         <%= f.collection_check_boxes(:interest_ids, Interest.all, :id, :name)%>
     </div>
 
