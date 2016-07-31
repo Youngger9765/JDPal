@@ -5,3 +5,15 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+interests = Interest.create([ { name: 'History & Culture'}, 
+                              { name: 'Art & Music'}, 
+                              { name: 'Nightlife'}, 
+                              { name: 'Shopping'}, 
+                              { name: 'Food'}, 
+                              { name: 'Nature'},
+                              { name: 'Business'}, 
+                              { name: 'Sports'},
+                              { name: 'Families'}, 
+                              { name: 'Fashion & Design'},
+                              { name: 'Language exchange'}, 
+                              ])

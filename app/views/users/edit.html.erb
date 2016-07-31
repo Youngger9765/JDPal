@@ -18,6 +18,11 @@
     <%= f.label :availability, "空閑時間" %>
     <%= f.text_field :availability, class: 'form-control' %>
 
+    <div class="form-group user-checklist">
+        <h3>Interest</h3> 
+        <%= f.collection_check_boxes(:interest_ids, Interest.all, :id, :name)%>
+    </div>
+
     <%= f.label :travel_footprints, "你曾經去過哪些地方？" %>
     <%= f.text_area :travel_footprints, class: 'form-control', rows: '5' %>
 
@@ -28,3 +33,18 @@
     <%= f.submit "確認", class: "btn btn-primary form-control" %>
   <%end%>
 </div>
+
+<style type="text/css">
+
+.user-checklist input[type="checkbox"] {
+  display: inline-block;
+  width: 5%;
+  font-size: 16px;
+}
+
+.user-checklist input[type="checkbox"] + label {
+  display: inline-block;
+  width: 95%;
+  font-size: 16px;
+}
+</style>

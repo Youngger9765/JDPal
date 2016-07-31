@@ -11,7 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160730025726) do
+ActiveRecord::Schema.define(version: 20160731003937) do
+
+  create_table "interestings", force: :cascade do |t|
+    t.integer  "user_id",     limit: 4
+    t.integer  "interest_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "interestings", ["interest_id"], name: "index_interestings_on_interest_id", using: :btree
+  add_index "interestings", ["user_id"], name: "index_interestings_on_user_id", using: :btree
+
+  create_table "interests", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  add_index "interests", ["name"], name: "index_interests_on_name", unique: true, using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255,   default: "", null: false
