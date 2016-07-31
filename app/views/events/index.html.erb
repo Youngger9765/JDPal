@@ -44,7 +44,38 @@ Hello!
 
 <div id="index-pals">
   <h4 class="col-md-12 text-center">Our Local Pals</h4>
+
+  <div id="index-pals-block" class="col-md-8 col-md-offset-2 text-center">
+    
+    <% @users.each do |user|%>
+      <div class="row">
+        <div class="col-md-5">
+          <%= image_tag("#{user.head_shot}")%>
+        </div>
+        <div class="col-md-7 text-left">
+          <h3 style="margin-top: 0;"><%= user.name%></h3>
+          <h4>
+            <% user.interests.each do |i|%>
+              <%= i.name.upcase%>/
+            <% end %>
+          </h4> 
+          <p>
+            <% user.languages.each do |l|%>
+              <%= l.name%>
+              (<%= user.user_language_ships.find_by(:language_id => l.id).level%>)
+              /
+            <% end %>
+          </p>
+          <p><%= user.familiar_areas%></p>
+          <div>
+            <%= link_to "more", user_path(user), class: "btn btn-default btn-lg text-center"%>
+          </div>
+        </div>
+      </div>
+    <% end %>
   
+  </div>
+
 </div>
 
 
