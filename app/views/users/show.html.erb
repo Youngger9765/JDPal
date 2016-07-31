@@ -32,7 +32,13 @@
       </div>
       <div class="row">
         <p class="col-md-4">Languages</p>
-        <p class="col-md-8"></p>
+        <p class="col-md-8">
+          <% @user.languages.each do |l|%>
+            <%= l.name%>
+            (<%= @user.user_language_ships.find_by(:language_id => l.id).level%>)
+            /
+          <% end %>
+        </p>
         <hr>
       </div>
       <div class="row">

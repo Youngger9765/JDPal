@@ -24,6 +24,37 @@
         <%= f.collection_check_boxes(:interest_ids, Interest.all, :id, :name)%>
     </div>
 
+    <div class="form-group user-checklist">
+        <h3>Languages <span style="color: red;">*</span></h3> 
+        <p>語言</p>
+        <table class="table">
+            <tr>
+                <td class="col-md-3"> </td>
+                <% LanguageLevel.all.each do |level|%>
+                    <td><%= level.name %> <%= level.chinese_name%></td>        
+                <% end%>
+            </tr>
+            <% Language.all.each do |lan|%>
+                <tr>
+                    <td class="col-md-3"><%= lan.name%><%= lan.chinese_name%></td> 
+                    <% LanguageLevel.all.each do |level|%>
+                        <td>
+                            <%= f.radio_button lan.name, level.name, checked: 
+                            if @user.user_language_ships.find_by(language_id: lan.id,
+                                                                 level: level.name 
+                                                                    )
+                                true
+                            else
+                                false
+                            end
+                            %>
+                        </td>        
+                    <% end%>
+                </tr>
+            <% end %>
+        </table>
+    </div>
+
     <%= f.label :travel_footprints, "你曾經去過哪些地方？" %>
     <%= f.text_area :travel_footprints, class: 'form-control', rows: '5' %>
 

@@ -17,8 +17,21 @@ class UsersController < ApplicationController
   end
 
   def update
+    if user_language_params
+      for language in user_language_params.keys
+        language_id = Language.all.find_by(name: language).id
+        level = user_language_params[language]
+        
+        if @user.user_language_ships.find_by(language_id: language_id)
+          ship = @user.user_language_ships.find_by(language_id: language_id)
+          ship.update(:level => level)
+        else
+          @user.user_language_ships.create(language_id: language_id, level: level)
+        end
+      end
+    end
+    
     if @user.update(user_params)
-
       flash[:notice] = "更新成功!"
       redirect_to user_path(@user)
     else
@@ -40,6 +53,14 @@ class UsersController < ApplicationController
                                  :description_English, :description_Chinese,
                                  :availability, :travel_footprints,
                                  :familiar_areas, :facebook_url, :interest_ids =>[],
+                                 :language_ids =>[],
+                                )
+  end
+
+  def user_language_params
+    params.require(:user).permit( :Mandarin, :English, :Japanese, :Cantonese,
+                                  :Taiwanese, :Korean, :Spanish, :French,
+                                  :German, :others,
                                 )
   end
 

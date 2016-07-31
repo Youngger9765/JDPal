@@ -9,6 +9,9 @@ class User < ActiveRecord::Base
   has_many :interestings
   has_many :interests, :through => :interestings
 
+  has_many :user_language_ships
+  has_many :languages, :through => :user_language_ships
+
 
   def self.from_omniauth(auth)
     # Case 1: Find existing user by facebook uid
@@ -58,5 +61,26 @@ class User < ActiveRecord::Base
     user.skip_confirmation! 
     user.save!
     return user
+  end
+
+  def Mandarin
+  end
+  def English
+  end
+  def Japanese
+  end
+  def Cantonese
+  end
+  def Taiwanese
+  end
+  def Korean
+  end
+  def Spanish
+  end
+  def French
+  end
+  def German
+  end
+  def others
   end
 end

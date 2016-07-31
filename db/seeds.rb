@@ -17,3 +17,15 @@ interests = Interest.create([ { name: 'History & Culture'},
                               { name: 'Fashion & Design'},
                               { name: 'Language exchange'}, 
                               ])
+
+languages = Language.create([ { name: 'Mandarin', chinese_name: '中文'}, 
+                              { name: 'English', chinese_name: '英文'},
+                              { name: 'Japanese', chinese_name: '日文'},
+                              { name: 'Cantonese', chinese_name: '廣東話'},
+                              { name: 'Taiwanese', chinese_name: '台語'},
+                              { name: 'Korean', chinese_name: '韓語'},
+                              { name: 'Spanish', chinese_name: '西班牙文'},
+                              { name: 'French', chinese_name: '法文'},
+                              { name: 'German', chinese_name: '德文'},
+                              { name: 'others', chinese_name: '其他'},
+                              ])
