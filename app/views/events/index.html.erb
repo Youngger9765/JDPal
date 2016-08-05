@@ -1,0 +1,90 @@
+<style type="text/css" data-reactid=".0.0.$theme_fonts">.font_0 {font: normal normal normal 120px/1.4em lulo-clean-w01-one-bold,sans-serif ;color:#363636;} 
+.font_1 {font: normal normal normal 16px/1.4em din-next-w01-light,din-next-w02-light,din-next-w10-light,sans-serif ;color:#605E5E;} 
+.font_2 {font: normal normal normal 40px/1.4em lulo-clean-w01-one-bold,sans-serif ;color:#363636;} 
+.font_3 {font: normal normal normal 60px/1.4em lulo-clean-w01-one-bold,sans-serif ;color:#363636;} 
+.font_4 {font: normal normal normal 28px/1.4em 'libre baskerville',serif ;color:#363636;} 
+.font_5 {font: normal normal normal 26px/1.4em lulo-clean-w01-one-bold,sans-serif ;color:#363636;} 
+.font_6 {font: normal normal normal 18px/1.4em lulo-clean-w01-one-bold,sans-serif ;color:#363636;} 
+.font_7 {font: normal normal normal 16px/1.4em didot-w01-italic,serif ;color:#363636;} 
+.font_8 {font: normal normal normal 15px/1.4em didot-w01-italic,serif ;color:#363636;} 
+.font_9 {font: normal normal normal 13px/1.4em didot-w01-italic,serif ;color:#605E5E;} 
+.font_10 {font: normal normal normal 12px/1.4em din-next-w01-light,din-next-w02-light,din-next-w10-light,sans-serif ;color:#605E5E;} 
+</style>
+
+
+<div id="index-title" class="col-md-12 text-center">
+  <h1 style="line-height: 1.2em; font-size: 41px;">
+    <span class="color_11 font_3">WELCOME TO TAIWAN</span>
+  </h1>
+  <h4>Let's do something "local"</h4>
+</div>
+
+<div class="clearfix"></div>
+
+<div id="index-rule" class="col-md-6 col-md-offset-3 text-center">
+  <h2>How It Works</h2>
+  <br>
+  <h3>Check Out Amazing Local Pals</h3>
+  <p>Choose one Local Pal by viewing descriptions of each Local Pal</p>
+
+  <br>
+
+  <h3>Book a Local Pal </h3>
+  <p>Fill out a request form, and your Local Pal will contact you to come up with a plan per your needs and their experience</p>
+
+  <br>
+
+  <h3>Meet your Local Pal & Have Fun</h3>
+  <p>Don't forget to share your review on Facebook</p>
+  
+</div>
+
+<div class="clearfix"></div>
+
+<div id="index-pals">
+  <h4 class="col-md-12 text-center">Our Local Pals</h4>
+
+  <div id="index-pals-block" class="col-md-8 col-md-offset-2 text-center">
+    
+    <% @users.each do |user|%>
+      <div class="row">
+        <div class="col-md-5">
+          <%= image_tag("#{user.head_shot}")%>
+        </div>
+        <div class="col-md-7 text-left">
+          <h3 style="margin-top: 0;"><%= user.name%></h3>
+          <h4>
+            <% user.interests.each do |i|%>
+              <%= i.name.upcase%>/
+            <% end %>
+          </h4> 
+          <p>
+            <% user.languages.each do |l|%>
+              <% if user.user_language_ships.find_by(:language_id => l.id).level == "Fluent" || user.user_language_ships.find_by(:language_id => l.id).level == "Intermediate"%>
+                <%= l.name%>
+                (<%= user.user_language_ships.find_by(:language_id => l.id).level%>)
+                /
+              <% end %>
+            <% end %>
+          </p>
+          <p><%= user.familiar_areas%></p>
+          <div>
+            <%= link_to "more", user_path(user), class: "btn btn-default btn-lg text-center"%>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+

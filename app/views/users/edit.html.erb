@@ -1,0 +1,82 @@
+<div class="col-md-6 ">
+  <%=form_for @user, :url => user_path(current_user,current_user), :method => :PATCH do |f| %>
+    <%= f.label :name, "姓名" %>
+    <%= f.text_field :name, class: 'form-control' %>
+
+    <%= f.label :nick_name, "暱稱" %>
+    <%= f.text_field :nick_name, class: 'form-control' %>
+
+    <%= f.label :description_English, "個人敘述(英文)" %>
+    <%= f.text_area :description_English, class: 'form-control', rows: '15'%>
+
+    <%= f.label :description_Chinese, "個人敘述(中文)" %>
+    <%= f.text_area :description_Chinese, class: 'form-control', rows: '15' %>
+
+    <%= f.label :profession, "職業" %>
+    <%= f.text_field :profession, class: 'form-control' %>
+
+    <%= f.label :availability, "空閑時間" %>
+    <%= f.text_field :availability, class: 'form-control' %>
+
+    <div class="form-group user-checklist">
+        <h3>Areas of Interests <span style="color: red;">*</span></h3> 
+        <p>興趣領域</p>
+        <%= f.collection_check_boxes(:interest_ids, Interest.all, :id, :name)%>
+    </div>
+
+    <div class="form-group user-checklist">
+        <h3>Languages <span style="color: red;">*</span></h3> 
+        <p>語言</p>
+        <table class="table">
+            <tr>
+                <td class="col-md-3"> </td>
+                <% LanguageLevel.all.each do |level|%>
+                    <td><%= level.name %> <%= level.chinese_name%></td>        
+                <% end%>
+            </tr>
+            <% Language.all.each do |lan|%>
+                <tr>
+                    <td class="col-md-3"><%= lan.name%><%= lan.chinese_name%></td> 
+                    <% LanguageLevel.all.each do |level|%>
+                        <td>
+                            <%= f.radio_button lan.name, level.name, checked: 
+                            if @user.user_language_ships.find_by(language_id: lan.id,
+                                                                 level: level.name 
+                                                                    )
+                                true
+                            else
+                                false
+                            end
+                            %>
+                        </td>        
+                    <% end%>
+                </tr>
+            <% end %>
+        </table>
+    </div>
+
+    <%= f.label :travel_footprints, "你曾經去過哪些地方？" %>
+    <%= f.text_area :travel_footprints, class: 'form-control', rows: '5' %>
+
+    <%= f.label :familiar_areas, "熟悉的區域" %>
+    <%= f.text_area :familiar_areas, class: 'form-control', rows: '5' %>
+
+    <br>
+    <%= f.submit "確認", class: "btn btn-primary form-control" %>
+  <%end%>
+</div>
+
+<style type="text/css">
+
+.user-checklist input[type="checkbox"] {
+  display: inline-block;
+  width: 5%;
+  font-size: 16px;
+}
+
+.user-checklist input[type="checkbox"] + label {
+  display: inline-block;
+  width: 95%;
+  font-size: 16px;
+}
+</style>

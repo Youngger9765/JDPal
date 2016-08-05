@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jdpal</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<% if current_user %>
+  <%= link_to('登出', destroy_user_session_path, :method => :delete) %> |
+  <%= link_to('修改密碼', edit_registration_path(:user)) %>
+<% else %>
+  <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path, :class =>"btn btn-info" %>
+  <%= link_to('註冊', new_registration_path(:user)) %> |
+  <%= link_to('登入', new_session_path(:user)) %>
+<% end %>
+
+<% if current_user %>
+<%= current_user.email %>
+<% end %>
+
+<br>
+
+<div class="container">
+  <h1>後台管理</h1>
+  <%=link_to "管理使用者", admin_users_path, :class => "btn btn-info btn-lg"%>
+  <br>
+  <%= yield %>
+</div>
+
+
+</body>
+</html>
