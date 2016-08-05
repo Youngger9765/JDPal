@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  config.secret_key = 'bc2f70179d13954e8c260e5b40749f2dc2ae0c3c196798eeaccf7fd8afc9770181c1d652742f14a256c92af474bab4e067c38052e8ea0f027a0cf2931d937cd8'
+  # config.secret_key = 'bc2f70179d13954e8c260e5b40749f2dc2ae0c3c196798eeaccf7fd8afc9770181c1d652742f14a256c92af474bab4e067c38052e8ea0f027a0cf2931d937cd8'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -271,8 +271,8 @@ Devise.setup do |config|
   # When using OmniAuth, Devise cannot automatically set OmniAuth path,
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
-  # fb_config = YAML.load(File.read("#{Rails.root}/config/facebook.yml"))[Rails.env]
-  config.omniauth :facebook, ENV["facebook_app_id"], ENV["facebook_secret"],
+  fb_config = YAML.load(File.read("#{Rails.root}/config/facebook.yml"))[Rails.env]
+  config.omniauth :facebook, fb_config["app_id"], fb_config["secret"],
                   scope: 'public_profile, email', 
                   info_fields: 'email, name, link',
                   secure_image_url: true,
