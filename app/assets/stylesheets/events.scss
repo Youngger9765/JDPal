@@ -2,10 +2,15 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#index-pals-block .btn {
-  color:orange;
-  border-color: orange;
-  width:60%;
+#index-pals-block {
+  .btn {
+    color:orange;
+    border-color: orange;
+    width:60%;
+  }
+  .row {
+    margin: 15px;
+  }
 }
 
 #index-pals-block .btn:hover {

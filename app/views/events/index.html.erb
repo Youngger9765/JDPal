@@ -60,9 +60,11 @@
           </h4> 
           <p>
             <% user.languages.each do |l|%>
-              <%= l.name%>
-              (<%= user.user_language_ships.find_by(:language_id => l.id).level%>)
-              /
+              <% if user.user_language_ships.find_by(:language_id => l.id).level == "Fluent" || user.user_language_ships.find_by(:language_id => l.id).level == "Intermediate"%>
+                <%= l.name%>
+                (<%= user.user_language_ships.find_by(:language_id => l.id).level%>)
+                /
+              <% end %>
             <% end %>
           </p>
           <p><%= user.familiar_areas%></p>
