@@ -14,6 +14,16 @@ test:
   username: root
   password:
 
+# live
+# production:
+#   adapter: mysql2
+#   encoding: utf8
+#   database: JDpal
+#   host: localhost
+#   username: root
+#   password:
+
+# Heroku
 production: 
   adapter: postgresql 
   encoding: unicode
