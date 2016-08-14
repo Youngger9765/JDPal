@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def show
-    @photos = @user.photos.all
+    # @photos = @user.photos.all
   end
 
   def edit

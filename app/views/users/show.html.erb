@@ -6,14 +6,6 @@
   <%= link_to user_path(@user), class: "col-md-12" do%>
     <%= image_tag (@user.head_shot), style: "width: 80px; height: 80px; display: inline; border-radius: 10px; position: relative; right: 10px; margin:10px;"%>
   <%end%>
-  <% @photos.each do |photo|%>
-    <%=  image_tag(photo.image.url(:thumb))%>
-  <% end %>
-
-  <% if current_user == @user%>
-    <div><%= link_to "新增相片", new_user_photo_path(@user)%></div>
-    <div><%= link_to "所有相片", user_photos_path(@user)%></div>
-  <% end %>
 
   <hr>
   <div id="user_about" class="col-md-6 col-md-offset-3">
