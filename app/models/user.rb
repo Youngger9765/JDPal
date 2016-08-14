@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   has_many :user_language_ships
   has_many :languages, :through => :user_language_ships
 
+  has_many :user_role_ships
+  has_many :roles, :through => :user_role_ships
+
 
   def self.from_omniauth(auth)
     # Case 1: Find existing user by facebook uid

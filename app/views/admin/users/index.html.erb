@@ -6,11 +6,23 @@ Users
       <tr>
         <td>id</td>
         <td>email</td>
-      </tr>
+        <td>role</td>
+      </tr
       <% @users.each do |user|%>
         <tr>
           <td><%= user.id %></td>
           <td><%= user.email %></td>
+          <td>
+
+            <div class="form-group">
+              <%=form_for user, :url => admin_user_path(user, :edit_user => user.id), :method => :PATCH do |f| %>
+                <%= f.collection_check_boxes(:role_ids, Role.all, :id, :name)%>
+                <br>
+                <%= f.submit "確認", class: "btn btn-primary form-control" %>
+              <%end%>
+            </div>
+
+          </td>
         </tr>
       <% end %>
     </table> 
