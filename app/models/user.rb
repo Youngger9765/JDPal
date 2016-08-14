@@ -15,6 +15,8 @@ class User < ActiveRecord::Base
   has_many :user_role_ships
   has_many :roles, :through => :user_role_ships
 
+  has_many :orders
+
 
   def self.from_omniauth(auth)
     # Case 1: Find existing user by facebook uid

@@ -56,10 +56,15 @@
         <p class="col-md-8"><%= @user.travel_footprints%></p>
         <hr>
       </div>
-      
-      
+      <hr>
+      <div class="row">
+        <div class="col-md-12">
+          <%=link_to "Request", new_user_order_path(@user), :class => "btn btn-warning btn-lg col-md-12"%>
+        </div>
+      </div>
+      <hr>
     </div>
-  </div>
-    
-
+  </div>    
 </div>
+
+  
