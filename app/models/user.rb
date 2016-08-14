@@ -66,6 +66,19 @@ class User < ActiveRecord::Base
     return user
   end
 
+  def self.is_tour_guide
+    users = User.all
+    ids=[]
+
+    users.each do |user|
+      if user.roles.pluck('name').include? "tour_guide"
+        ids.push(user.id)
+      end
+    end
+
+    User.where(:id => ids)
+  end
+
   def Mandarin
   end
   def English

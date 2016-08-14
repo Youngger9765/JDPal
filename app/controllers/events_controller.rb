@@ -1,6 +1,6 @@
 class EventsController < ApplicationController
 
   def index
-    @users = User.all
+    @users = User.is_tour_guide
   end
 end
