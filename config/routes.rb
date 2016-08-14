@@ -5,10 +5,11 @@ Rails.application.routes.draw do
   root 'events#index'
 
   resources :events
-  resources :users do 
-    resources :photos
+
+  resources :users do
+    resources :orders
   end
-  
+
   namespace :admin do
     resources :users
   end

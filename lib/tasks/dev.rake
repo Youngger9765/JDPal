@@ -38,4 +38,11 @@ namespace :dev do
                                   { name: 'Language exchange'}, 
                                   ])
   end
+
+  task :init_role => :environment do
+
+    roles = Role.create([ { name: 'admin'}, 
+                          { name: 'tour_guide'},
+                        ])
+  end
 end

@@ -1,0 +1,7 @@
+<h3>Create Order</h3>
+
+<%= form_for @order, :url => user_orders_path do |f| %>
+
+  <%= render :partial => 'form', :locals => { :f => f} %>
+
+<% end %>

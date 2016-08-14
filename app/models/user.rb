@@ -12,7 +12,10 @@ class User < ActiveRecord::Base
   has_many :user_language_ships
   has_many :languages, :through => :user_language_ships
 
-  has_many :photos
+  has_many :user_role_ships
+  has_many :roles, :through => :user_role_ships
+
+  has_many :orders
 
 
   def self.from_omniauth(auth)
@@ -63,6 +66,19 @@ class User < ActiveRecord::Base
     user.skip_confirmation! 
     user.save!
     return user
+  end
+
+  def self.is_tour_guide
+    users = User.all
+    ids=[]
+
+    users.each do |user|
+      if user.roles.pluck('name').include? "tour_guide"
+        ids.push(user.id)
+      end
+    end
+
+    User.where(:id => ids)
   end
 
   def Mandarin

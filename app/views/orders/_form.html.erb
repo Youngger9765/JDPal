@@ -1,0 +1,30 @@
+<div class="form-group">
+  <h3><%= f.label :user_prefer_place ,"Prefer Place"%></h3>  
+  <%= f.text_field :user_prefer_place, :class => "form-control" %>
+</div>
+
+<div class="form-group">
+  <h3><%= f.label :user_prefer_date ,"Prefer Date"%></h3>  
+  <%= f.text_field :user_prefer_date, :class => "form-control datepicker", :"data-provide"=>'datepicker'%>
+</div>
+
+
+<%= f.submit "Send",:class => "btn btn-primary" %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.datepicker').datepicker();
+    var choose_date ="";
+    $('.datepicker').change(function() {
+      var date = $('.datepicker').val().split("/");
+      var mm = date[0];
+      var dd = date[1];
+      var yy = date[2];
+      choose_date = yy + "/" + mm + "/" + dd;
+      $('.datepicker').val(choose_date);
+    });
+    $("form").click(function(){
+      $('.datepicker').val(choose_date);
+    });
+  });
+</script>
