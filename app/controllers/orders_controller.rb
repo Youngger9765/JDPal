@@ -3,9 +3,12 @@ class OrdersController < ApplicationController
   layout "application"
 
   before_action :authenticate_user!
+  before_action :find_user
 
   def index
-    
+    @orders = @user.orders
+    current_user_id = current_user.id
+    @customer_orders = @orders.where(:tour_guide_id => current_user_id)
   end
 
   def new
@@ -48,5 +51,9 @@ class OrdersController < ApplicationController
                                   :final_date, :user_prefer_place,
                                   :final_place, :note
                                 )
+  end
+
+  def find_user
+    @user = User.find(params[:user_id])
   end
 end

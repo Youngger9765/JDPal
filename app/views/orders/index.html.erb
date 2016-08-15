@@ -1,0 +1,62 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <h1>I Order a Tour Guide</h1> 
+      <table class="table" id="admin_users_table">
+        <tr>
+          <td>Tour Guide</td>
+          <td>prefer date</td>
+          <td>prefer place</td>
+          <td>final_date</td>
+          <td>final_place</td>
+          <td>contacted</td>
+          <td>finished</td>
+        </tr>
+        <% @orders.each do |order|%>
+          <tr>
+            <td>
+              <%= User.find(order.tour_guide_id).name%>
+            </td>
+            <td><%= order.user_prefer_date%></td>
+            <td><%= order.user_prefer_place%></td>
+            <td><%= order.final_date%></td>
+            <td><%= order.final_place%></td>
+            <td><%= order.contacted%></td>
+            <td><%= order.finished%></td>
+          </tr>
+        <%end%>
+      </table> 
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10">
+      <h1>I am a Tour Guide, these are my orders</h1> 
+      <table class="table" id="admin_users_table">
+        <tr>
+          <td>order_id</td>
+          <td>Traveller</td>
+          <td>Email</td>
+          <td>prefer date</td>
+          <td>prefer place</td>
+          <td>final_date</td>
+          <td>final_place</td>
+          <td>contacted</td>
+          <td>finished</td>
+        </tr>
+        <% @customer_orders.each do |order|%>
+          <tr>
+            <td><%= order.id%></td>
+            <td><%= order.user.name%></td>
+            <td><%= order.user.email%></td>
+            <td><%= order.user_prefer_date%></td>
+            <td><%= order.user_prefer_place%></td>
+            <td><%= order.final_date%></td>
+            <td><%= order.final_place%></td>
+            <td><%= order.contacted%></td>
+            <td><%= order.finished%></td>
+          </tr>
+        <%end%>
+      </table> 
+    </div>
+  </div>
+</div>
