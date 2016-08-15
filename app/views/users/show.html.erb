@@ -33,10 +33,19 @@
       <div class="row">
         <p class="col-md-4">Languages</p>
         <p class="col-md-8">
-          <% @user.languages.each do |l|%>
-            <%= l.name%>
-            (<%= @user.user_language_ships.find_by(:language_id => l.id).level%>)
-            /
+          <% @user.languages.each do |language|%>
+            <% if @user.user_language_ships.find_by(:language_id => language.id).level =="Fluent" %>
+              <%= language.name%>
+              (Fluent)
+              /
+            <% end %>
+          <% end %>
+          <% @user.languages.each do |language|%>
+            <% if @user.user_language_ships.find_by(:language_id => language.id).level =="Intermediate" %>
+              <%= language.name%>
+              (Intermediate)
+              /
+            <% end %>
           <% end %>
         </p>
         <hr>
