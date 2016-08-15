@@ -73,6 +73,11 @@
       </div>
       <hr>
     </div>
+  </div>
+  <div id="user_about" class="col-md-3">
+    <% if current_user && @user == current_user%>
+      <%= link_to "My Order", user_orders_path(@user), :class => "btn btn-success btn-lg" %>
+    <% end %>
   </div>    
 </div>
 
