@@ -1,4 +1,10 @@
 namespace :dev do
+
+  task :rebuild =>[ "db:drop", "db:create", "db:migrate", 
+                    "init_languages", "init_language_level",
+                    "init_interests", "init_role"
+                  ]
+
   task :init_languages => :environment do
 
     languages = Language.create([ { name: 'Mandarin', chinese_name: '中文'}, 

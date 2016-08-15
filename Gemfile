@@ -30,8 +30,6 @@ gem 'bootstrap-datepicker-rails'
 
 gem "paperclip", "~> 4.3"
 
-gem "figaro"
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

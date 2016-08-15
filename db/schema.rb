@@ -11,7 +11,6 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
 ActiveRecord::Schema.define(version: 20160814131944) do
 
   create_table "interestings", force: :cascade do |t|
@@ -47,7 +46,7 @@ ActiveRecord::Schema.define(version: 20160814131944) do
   end
 
   add_index "languages", ["name"], name: "index_languages_on_name", unique: true, using: :btree
-  
+
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id",           limit: 4
     t.integer  "tour_guide_id",     limit: 4
