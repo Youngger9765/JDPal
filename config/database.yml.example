@@ -3,7 +3,7 @@ development:
   encoding: utf8
   database: JDpal_local
   host: localhost
-  username: root
+  username: 
   password:
 
 test:
@@ -11,7 +11,7 @@ test:
   encoding: utf8
   database: JDpal_test
   host: localhost
-  username: root
+  username: 
   password:
 
 # live

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   root 'events#index'
 
   resources :events
+
   resources :users do
     resources :orders
   end

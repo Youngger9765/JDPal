@@ -1,0 +1,12 @@
+photo index
+
+<%=form_for @photos, :url => user_photo_path(current_user), :method => :PATCH do |f| %>
+
+  <% @photos.each do |photo|%>
+    <%= image_tag(@photo.image.url(:thumb))%>
+  <% end %>
+  
+
+  <%= f.submit "上傳", class: "btn btn-primary form-control" %>
+
+<% end %>
