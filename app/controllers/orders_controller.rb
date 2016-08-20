@@ -12,7 +12,8 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @tour_guide = User.find(params["user_id"])
+    tour_guide_ids = UserRoleShip.all.where(:role_id => 2).pluck(:user_id)
+    @tour_guide = User.all.where(:id => tour_guide_ids)
     @user = current_user
     @order = Order.new
   end
@@ -22,17 +23,21 @@ class OrdersController < ApplicationController
   end
 
   def create
+    @tour_guide_ids = params[:order][:tour_guide_ids].reject {|e| e.blank?}
 
-    @tour_guide = User.find(params["user_id"])
-    @user = current_user
-    @order = @user.orders.create(order_params)
-    @order.tour_guide_id = @tour_guide.id
-    
-    if @order.save!
-      redirect_to events_path
-    else
-      redirect_to :new
+    for tour_guide_id in @tour_guide_ids
+      @user = current_user
+      @order = @user.orders.create(order_params)
+      @order.tour_guide_id = tour_guide_id
+      @order.save!
+
+      if !@order.save!
+        redirect_to :new
+      end
     end 
+
+    redirect_to events_path
+
   end
 
   def update
@@ -49,7 +54,7 @@ class OrdersController < ApplicationController
     params.require(:order).permit(:user_id, :tour_guide_id, :finished,
                                   :contacted, :user_prefer_date, 
                                   :final_date, :user_prefer_place,
-                                  :final_place, :note
+                                  :final_place, :note 
                                 )
   end
 
