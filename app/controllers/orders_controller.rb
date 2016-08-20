@@ -12,7 +12,8 @@ class OrdersController < ApplicationController
   end
 
   def new
-    @tour_guide = User.all
+    tour_guide_ids = UserRoleShip.all.where(:role_id => 2).pluck(:user_id)
+    @tour_guide = User.all.where(:id => tour_guide_ids)
     @user = current_user
     @order = Order.new
   end
