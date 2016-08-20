@@ -1,4 +1,5 @@
-<h3>Create Order</h3>
+<h3>Hello <%= @user.nick_name or @user.name%>,</h3>
+<h4>Would you like to make a reservation?</h4>
 
 <%= form_for @order, :url => user_orders_path do |f| %>
 

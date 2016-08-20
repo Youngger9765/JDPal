@@ -19,7 +19,7 @@
     </div>
   <%end%>
 
-  <div class="container">
+  <div class="container" id="header-container">
     <div class="pull-left">
       <%= link_to "JDpal Admin", admin_users_path%>
     </div>
@@ -45,7 +45,9 @@
       </div>
     
     <% end %>
-    <br>
+  </div>
+  
+  <div class="container" id="main-container">
     <%= yield %>
   </div>
 
