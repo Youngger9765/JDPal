@@ -14,6 +14,9 @@ class OrdersController < ApplicationController
   def new
     tour_guide_ids = UserRoleShip.all.where(:role_id => 2).pluck(:user_id)
     @tour_guide = User.all.where(:id => tour_guide_ids)
+    
+    @checked_tour_guide_id = params[:user_id]
+    
     @user = current_user
     @order = Order.new
   end
