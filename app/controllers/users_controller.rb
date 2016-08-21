@@ -56,7 +56,7 @@ class UsersController < ApplicationController
                                  :familiar_areas, :facebook_url, 
                                  :country, :phone_number,
                                  :interest_ids =>[],
-                                 :language_ids =>[]
+                                 :language_ids =>[],
                                 )
   end
 

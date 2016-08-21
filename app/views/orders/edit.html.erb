@@ -1,0 +1,15 @@
+<%= form_for @order, :url => user_order_path(current_user, @order), :method => :PATCH do |f| %>
+
+  <%= render :partial => 'form', :locals => { :f => f} %>
+
+<% end %>
+
+<script type="text/javascript">
+  $("#tour-guide-checklist label").after("<br>");
+  $("#tour-guide-checklist").remove();
+
+  if (<%= @checked_tour_guide_id %>) {
+    var input_id = "#order_tour_guide_ids_" + <%= @checked_tour_guide_id%>;
+    $(input_id).attr("checked","");
+  };
+</script>
