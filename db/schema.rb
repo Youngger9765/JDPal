@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160814131944) do
+ActiveRecord::Schema.define(version: 20160821030616) do
 
   create_table "interestings", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -119,10 +119,14 @@ ActiveRecord::Schema.define(version: 20160814131944) do
     t.string   "availability",           limit: 255
     t.string   "travel_footprints",      limit: 255
     t.string   "familiar_areas",         limit: 255
+    t.string   "phone_number",           limit: 255
+    t.string   "country",                limit: 255
   end
 
+  add_index "users", ["country"], name: "index_users_on_country", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["fb_uid"], name: "index_users_on_fb_uid", using: :btree
+  add_index "users", ["phone_number"], name: "index_users_on_phone_number", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
 end
