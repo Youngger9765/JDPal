@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-md-10">
+
+    <% if @role == "traveler"%>
+        <h1 class="text-center"> This is my request!</h1>
+    <% elsif @role == "tour-guide"%>
+        <h1 class="text-center">I am a Tour Guide, this is my order.</h1> 
+    <% end%>
+
+    <h2>order_id: <%= @order.id%></h2>
+    <h2>Traveller: <%= @order.name%></h2> 
+    <h2>Email: <%= @order.email%></h2>  
+    <h2>phone_number: <%= @order.phone_number%></h2> 
+    <h2>prefer date: <%= @order.user_prefer_date%></h2>
+    <h2>prefer place: <%= @order.user_prefer_place%></h2>
+    <h2>People Count: <%= @order.people_count%></h2>
+    <h2>Request Days: <%= @order.request_days%></h2>
+    <h2>Purpose: <%= @order.purpose%></h2>
+    <h2>others: <%= @order.others%></h2>
+    <h2>contacted: <%= @order.contacted%></h2>
+    <h2>finished: <%= @order.finished%></h2>
+  </div>
+</div>

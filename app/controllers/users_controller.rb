@@ -53,7 +53,9 @@ class UsersController < ApplicationController
     params.require(:user).permit(:name, :nick_name, :profession, :head_shot,
                                  :description_English, :description_Chinese,
                                  :availability, :travel_footprints,
-                                 :familiar_areas, :facebook_url, :interest_ids =>[],
+                                 :familiar_areas, :facebook_url, 
+                                 :country, :phone_number,
+                                 :interest_ids =>[],
                                  :language_ids =>[],
                                 )
   end
