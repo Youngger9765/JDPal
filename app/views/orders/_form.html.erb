@@ -9,7 +9,7 @@
 </div>
 
 <div class="form-group" id="tour-guide-checklist">
-  <h3>Tour Guide <span style="color: red;">*</span></h3> 
+  <h3>Tour Guide (multiple)<span style="color: red;">*</span></h3> 
   <h3>
     <%= f.collection_check_boxes(:tour_guide_ids, @tour_guide.all, :id, :name)%>  
   </h3>

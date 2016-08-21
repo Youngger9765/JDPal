@@ -9,4 +9,9 @@
 
 <script type="text/javascript">
   $("#tour-guide-checklist label").after("<br>");
+
+  if (<%= @checked_tour_guide_id %>) {
+    var input_id = "#order_tour_guide_ids_" + <%= @checked_tour_guide_id%>;
+    $(input_id).attr("checked","");
+  };
 </script>
