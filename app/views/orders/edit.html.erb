@@ -1,8 +1,12 @@
-<%= form_for @order, :url => user_order_path(current_user, @order), :method => :PATCH do |f| %>
+<div class="col-md-8 col-md-offset-2">
 
-  <%= render :partial => 'form', :locals => { :f => f} %>
+  <%= form_for @order, :url => user_order_path(current_user, @order), :method => :PATCH do |f| %>
 
-<% end %>
+    <%= render :partial => 'form', :locals => { :f => f} %>
+
+  <% end %>
+
+</div>
 
 <script type="text/javascript">
   $("#tour-guide-checklist label").after("<br>");
