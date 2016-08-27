@@ -6,6 +6,14 @@
     <%= f.label :nick_name, "暱稱" %>
     <%= f.text_field :nick_name, class: 'form-control' %>
 
+    <%= f.label :gender, "Gender" %> <br>
+    <%= f.radio_button :gender, "M" %>  <i style="color:blue;" class="fa fa-venus" aria-hidden="true">(Male)</i>
+    <br>
+    <%= f.radio_button :gender, "F"%>  <i style="color:red;" class="fa fa-mars" aria-hidden="true">(Female)</i>
+    <br>
+    <%= f.radio_button :gender, "others" %>  <i class="fa fa-genderless" aria-hidden="true">(Others)</i><br>
+    <br>
+
     <%= f.label :description_English, "個人敘述(英文)" %>
     <%= f.text_area :description_English, class: 'form-control', rows: '15'%>
 
@@ -17,6 +25,12 @@
 
     <%= f.label :phone_number, "Phone Number" %>
     <%= f.text_field :phone_number, class: 'form-control' %>
+
+    <%= f.label :skype_id, "Skype ID" %>
+    <%= f.text_field :skype_id, class: 'form-control'%>
+
+    <%= f.label :birthday, "birthday" %>
+    <%= f.date_field :birthday, class: 'form-control' %>
 
     <%= f.label :country, "Country" %>
     <%= f.text_field :country, class: 'form-control' %>

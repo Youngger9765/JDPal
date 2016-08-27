@@ -1,10 +1,39 @@
+<h3><span style="color: red;">*必填</span></h3>
+
 <div class="form-group">
-  <h3><%= f.label :name ,"What's your name?"%></h3>  
+  <h3><%= f.label :name ,"Name"%><span style="color: red;">*</span></h3>  
   <%= f.text_field :name, :class => "form-control", value: @user.name %>
 </div>
 
+<!-- Birthday -->
 <div class="form-group">
-  <h3><%= f.label :email ,"Email"%></h3>  
+  <h3><%= f.label :birthday ,"Birthday"%><span style="color: red;">*</span></h3>  
+  <%= f.date_field :birthday, :class => "form-control", value: @user.birthday %>
+</div>
+
+<!-- Gender -->
+<div class="form-group">
+  <h3><%= f.label :gender ,"Gender"%></h3>  
+  <%= f.radio_button :gender, "M", :checked => (@user.gender.nil? || (@user.gender == "M")) %>  <i style="color:blue;" class="fa fa-venus" aria-hidden="true">(Male)</i>
+  <br>
+  <%= f.radio_button :gender, "F", :checked => (@user.gender.nil? || (@user.gender == "F"))%>  <i style="color:red;" class="fa fa-mars" aria-hidden="true">(Female)</i>
+  <br>
+  <%= f.radio_button :gender, "others", :checked => (@user.gender.nil? || (@user.gender == "others")) %>  <i class="fa fa-genderless" aria-hidden="true">(Others)</i><br>
+</div>
+
+<div class="form-group">
+  <h3><%= f.label :people_count ,"Group size"%><span style="color: red;">*</span></h3>  
+  <%= f.number_field :people_count, :class => "form-control", value: 1 %>
+</div>
+
+<!-- Skype ID -->
+<div class="form-group">
+  <h3><%= f.label :skype_id ,"Skype Id"%><span style="color: red;">*</span></h3>  
+  <%= f.text_field :skype_id, :class => "form-control", value: @user.skype_id %>
+</div>
+
+<div class="form-group">
+  <h3><%= f.label :email ,"Email"%><span style="color: red;">*</span></h3>  
   <%= f.text_field :email, :class => "form-control", value: @user.email %>
 </div>
 
@@ -13,51 +42,57 @@
   <%= f.text_field :phone_number, :class => "form-control", value: @user.phone_number %>
 </div>
 
+<div class="form-group">
+  <h3><%= f.label :language ,"language"%><span style="color: red;">*</span></h3>  
+  <%= f.text_field :language, :class => "form-control" %>
+</div>
+
+<div class="form-group">
+  <h3><%= f.label :country ,"The city you come from (country/city)"%><span style="color: red;">*</span></h3>  
+  <%= f.text_field :country, :class => "form-control" %>
+</div>
+
 <div class="form-group" id="tour-guide-checklist">
-  <h3>Tour Guide (multiple)<span style="color: red;">*</span></h3> 
+  <h3>Preferred Local Pals (multiple choice, if your selection is not applicable, JDpal will choose one for you)<span style="color: red;">*</span></h3> 
   <h3>
     <%= f.collection_check_boxes(:tour_guide_ids, @tour_guide.all, :id, :name)%>  
   </h3>
 </div>
 
 <div class="form-group">
-  <h3><%= f.label :user_prefer_place ,"Prefer Place"%></h3>  
-  <%= f.text_field :user_prefer_place, :class => "form-control" %>
-</div>
-
-<div class="form-group">
-  <h3><%= f.label :user_prefer_date ,"Prefer Start Date"%></h3>  
-  <%= f.text_field :user_prefer_date, :class => "form-control datepicker", :"data-provide"=>'datepicker'%>
-</div>
-
-<div class="form-group">
-  <h3><%= f.label :country ,"country"%></h3>  
-  <%= f.text_field :country, :class => "form-control" %>
-</div>
-
-<div class="form-group">
-  <h3><%= f.label :language ,"language"%></h3>  
-  <%= f.text_field :language, :class => "form-control" %>
-</div>
-
-<div class="form-group">
-  <h3><%= f.label :people_count ,"How many people go with you?"%></h3>  
-  <%= f.number_field :people_count, :class => "form-control", value: 1 %>
-</div>
-
-<div class="form-group">
-  <h3><%= f.label :request_days ,"request_days"%></h3>  
+  <h3><%= f.label :request_days ,"Duration of stay"%></h3>  
   <%= f.number_field :request_days, :class => "form-control", value: 1  %>
 </div>
 
 <div class="form-group">
-  <h3><%= f.label :purpose ,"purpose"%></h3>  
-  <%= f.text_field :purpose, :class => "form-control" %>
+  <h3><%= f.label :user_prefer_date ,"Preferred date and time slots"%><span style="color: red;">*</span></h3>  
+  <%= f.text_field :user_prefer_date, :class => "form-control datepicker", :"data-provide"=>'datepicker'%>
 </div>
 
 <div class="form-group">
-  <h3><%= f.label :others ,"Something noted?"%></h3>  
-  <%= f.text_area :others, :class => "form-control" %>
+  <h3><%= f.label :purpose ,"Purpose of visiting Taiwan"%></h3>  
+  <%= f.text_field :purpose, :class => "form-control" %>
+</div>
+
+
+<!-- Your interests -->
+<div class="form-group" id="order-interest-checklist">
+  <h3>
+  Areas of Interests <span style="color: red;">*</span>
+  <p>興趣領域</p>
+  <%= f.collection_check_boxes(:interest_ids, Interest.all, :id, :name, checked: @user.try(:interest_ids))%>
+  </h3> 
+</div>
+
+<div class="form-group">
+  <h3><%= f.label :user_prefer_place ,"Specific locations of interest"%></h3>
+  <%= f.text_field :user_prefer_place, :class => "form-control" %>
+</div>
+
+
+<div class="form-group">
+  <h3><%= f.label :others ,"Something noted us?"%></h3>  
+  <%= f.text_area :others, :class => "form-control", :style=>"height: 200px;" %>
 </div>
 
 
@@ -79,4 +114,6 @@
       $('.datepicker').val(choose_date);
     });
   });
+
+  $("#order-interest-checklist label").after("<br>")
 </script>

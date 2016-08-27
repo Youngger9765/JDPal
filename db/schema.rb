@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160821034615) do
+ActiveRecord::Schema.define(version: 20160827113041) do
 
   create_table "interestings", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 20160821034615) do
 
   add_index "languages", ["name"], name: "index_languages_on_name", unique: true, using: :btree
 
+  create_table "order_interestings", force: :cascade do |t|
+    t.integer  "order_id",    limit: 4
+    t.integer  "interest_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "order_interestings", ["interest_id"], name: "index_order_interestings_on_interest_id", using: :btree
+  add_index "order_interestings", ["order_id"], name: "index_order_interestings_on_order_id", using: :btree
+
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id",           limit: 4
     t.integer  "tour_guide_id",     limit: 4
@@ -68,7 +78,13 @@ ActiveRecord::Schema.define(version: 20160821034615) do
     t.integer  "request_days",      limit: 4
     t.string   "purpose",           limit: 255
     t.text     "others",            limit: 65535
+    t.date     "birthday"
+    t.string   "gender",            limit: 255
+    t.string   "skype_id",          limit: 255
   end
+
+  add_index "orders", ["birthday"], name: "index_orders_on_birthday", using: :btree
+  add_index "orders", ["gender"], name: "index_orders_on_gender", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -130,11 +146,16 @@ ActiveRecord::Schema.define(version: 20160821034615) do
     t.string   "familiar_areas",         limit: 255
     t.string   "phone_number",           limit: 255
     t.string   "country",                limit: 255
+    t.date     "birthday"
+    t.string   "gender",                 limit: 255
+    t.string   "skype_id",               limit: 255
   end
 
+  add_index "users", ["birthday"], name: "index_users_on_birthday", using: :btree
   add_index "users", ["country"], name: "index_users_on_country", using: :btree
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["fb_uid"], name: "index_users_on_fb_uid", using: :btree
+  add_index "users", ["gender"], name: "index_users_on_gender", using: :btree
   add_index "users", ["phone_number"], name: "index_users_on_phone_number", using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
