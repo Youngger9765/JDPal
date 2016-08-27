@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822015920) do
+ActiveRecord::Schema.define(version: 20160827113041) do
 
   create_table "interestings", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -47,6 +47,16 @@ ActiveRecord::Schema.define(version: 20160822015920) do
 
   add_index "languages", ["name"], name: "index_languages_on_name", unique: true, using: :btree
 
+  create_table "order_interestings", force: :cascade do |t|
+    t.integer  "order_id",    limit: 4
+    t.integer  "interest_id", limit: 4
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+  end
+
+  add_index "order_interestings", ["interest_id"], name: "index_order_interestings_on_interest_id", using: :btree
+  add_index "order_interestings", ["order_id"], name: "index_order_interestings_on_order_id", using: :btree
+
   create_table "orders", force: :cascade do |t|
     t.integer  "user_id",           limit: 4
     t.integer  "tour_guide_id",     limit: 4
@@ -70,6 +80,7 @@ ActiveRecord::Schema.define(version: 20160822015920) do
     t.text     "others",            limit: 65535
     t.date     "birthday"
     t.string   "gender",            limit: 255
+    t.string   "skype_id",          limit: 255
   end
 
   add_index "orders", ["birthday"], name: "index_orders_on_birthday", using: :btree
@@ -137,6 +148,7 @@ ActiveRecord::Schema.define(version: 20160822015920) do
     t.string   "country",                limit: 255
     t.date     "birthday"
     t.string   "gender",                 limit: 255
+    t.string   "skype_id",               limit: 255
   end
 
   add_index "users", ["birthday"], name: "index_users_on_birthday", using: :btree

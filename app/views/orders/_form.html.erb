@@ -6,8 +6,20 @@
 </div>
 
 <!-- Birthday -->
+<div class="form-group">
+  <h3><%= f.label :birthday ,"Birthday"%><span style="color: red;">*</span></h3>  
+  <%= f.date_field :birthday, :class => "form-control", value: @user.birthday %>
+</div>
 
 <!-- Gender -->
+<div class="form-group">
+  <h3><%= f.label :gender ,"Gender"%></h3>  
+  <%= f.radio_button :gender, "M", :checked => (@user.gender.nil? || (@user.gender == "M")) %>  <i style="color:blue;" class="fa fa-venus" aria-hidden="true">(Male)</i>
+  <br>
+  <%= f.radio_button :gender, "F", :checked => (@user.gender.nil? || (@user.gender == "F"))%>  <i style="color:red;" class="fa fa-mars" aria-hidden="true">(Female)</i>
+  <br>
+  <%= f.radio_button :gender, "others", :checked => (@user.gender.nil? || (@user.gender == "others")) %>  <i class="fa fa-genderless" aria-hidden="true">(Others)</i><br>
+</div>
 
 <div class="form-group">
   <h3><%= f.label :people_count ,"Group size"%><span style="color: red;">*</span></h3>  
@@ -15,6 +27,10 @@
 </div>
 
 <!-- Skype ID -->
+<div class="form-group">
+  <h3><%= f.label :skype_id ,"Skype Id"%><span style="color: red;">*</span></h3>  
+  <%= f.text_field :skype_id, :class => "form-control", value: @user.skype_id %>
+</div>
 
 <div class="form-group">
   <h3><%= f.label :email ,"Email"%><span style="color: red;">*</span></h3>  
@@ -60,6 +76,13 @@
 
 
 <!-- Your interests -->
+<div class="form-group" id="order-interest-checklist">
+  <h3>
+  Areas of Interests <span style="color: red;">*</span>
+  <p>興趣領域</p>
+  <%= f.collection_check_boxes(:interest_ids, Interest.all, :id, :name, checked: @user.try(:interest_ids))%>
+  </h3> 
+</div>
 
 <div class="form-group">
   <h3><%= f.label :user_prefer_place ,"Specific locations of interest"%></h3>
@@ -91,4 +114,6 @@
       $('.datepicker').val(choose_date);
     });
   });
+
+  $("#order-interest-checklist label").after("<br>")
 </script>
