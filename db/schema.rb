@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827113041) do
+ActiveRecord::Schema.define(version: 20160827130131) do
 
   create_table "interestings", force: :cascade do |t|
     t.integer  "user_id",     limit: 4
@@ -61,7 +61,7 @@ ActiveRecord::Schema.define(version: 20160827113041) do
     t.integer  "user_id",           limit: 4
     t.integer  "tour_guide_id",     limit: 4
     t.boolean  "finished"
-    t.boolean  "contacted"
+    t.string   "status",            limit: 255
     t.date     "user_prefer_date"
     t.date     "final_date"
     t.string   "user_prefer_place", limit: 255
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20160827113041) do
     t.date     "birthday"
     t.string   "gender",            limit: 255
     t.string   "skype_id",          limit: 255
+    t.integer  "group_id",          limit: 4
   end
 
   add_index "orders", ["birthday"], name: "index_orders_on_birthday", using: :btree

@@ -4,6 +4,7 @@
       <h1>I Order a Tour Guide</h1> 
       <table class="table" id="admin_users_table">
         <tr>
+          <td>Group_id</td>
           <td>id</td>
           <td>Tour Guide</td>
           <td>start date</td>
@@ -11,12 +12,13 @@
           <td>People Count</td>
           <td>Request Days</td>
           <td>Purpose</td> 
-          <td>contacted</td>
+          <td>status</td>
           <td>finished</td>
           <td>Edit</td>
         </tr>
         <% @orders.each do |order|%>
           <tr>
+            <td><%= order.group_id %></td>
             <td><%= link_to order.id, user_order_path(current_user, order.id, :role => "traveler") %></td>
             <td>
               <%= User.find(order.tour_guide_id).name%>
@@ -26,7 +28,7 @@
             <td><%= order.people_count%></td>
             <td><%= order.request_days%></td>
             <td><%= order.purpose%></td>
-            <td><%= order.contacted%></td>
+            <td><%= order.status%></td>
             <td><%= order.finished%></td>
             <td><%= link_to "Edit", edit_user_order_path(current_user,order), :class => "btn btn-success btn-sm"%></td>
           </tr>
@@ -39,6 +41,7 @@
       <h1>I am a Tour Guide, these are my orders</h1> 
       <table class="table" id="admin_users_table">
         <tr>
+          <td>Group_id</td>
           <td>order_id</td>
           <td>Traveller</td>
           <td>Email</td>
@@ -49,11 +52,12 @@
           <td>Request Days</td>
           <td>Purpose</td>
           <td>others</td> 
-          <td>contacted</td>
+          <td>status</td>
           <td>finished</td>
         </tr>
         <% @customer_orders.each do |order|%>
           <tr>
+            <td><%= order.group_id %></td>
             <td><%= link_to order.id, user_order_path(current_user,order, :role=>"tour-guide")%></td>
             <td><%= order.name%></td>
             <td><%= order.email%></td>
@@ -64,7 +68,7 @@
             <td><%= order.request_days%></td>
             <td><%= order.purpose%></td>
             <td><%= order.others%></td>
-            <td><%= order.contacted%></td>
+            <td><%= order.status%></td>
             <td><%= order.finished%></td>
           </tr>
         <%end%>

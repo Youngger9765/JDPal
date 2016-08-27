@@ -25,11 +25,16 @@
         <% @order.interests.each do |interest|%>
             <%=interest.name%> /
         <%end%>
-        
-
     </h2>
     <h2>others: <%= @order.others%></h2>
-    <h2>contacted: <%= @order.contacted%></h2>
+    <h2>status: <%= @order.status%></h2>
     <h2>finished: <%= @order.finished%></h2>
+
+    <% if @role == "tour-guide"%>
+        <% if !@order.status || (@order.status =="")%>
+            <h1><%= link_to "Accept", user_order_path(@user, @order, :status =>"accept"),:class => "btn btn-success btn-lg", data: { confirm: "We will send this confirmed mail to traveller. Do you already checked out the detail?" }, :method => "PATCH"%>
+            </h1>
+        <%end%>
+    <% end%>
   </div>
 </div>

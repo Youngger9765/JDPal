@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   before_action :authenticate_user!
   before_action :find_user
-  before_action :find_order, only: [:show, :edit, :update]
+  before_action :find_order, only: [:show, :edit, :update, :checked_order]
 
   def index
     @orders = @user.orders
@@ -42,12 +42,19 @@ class OrdersController < ApplicationController
   end
 
   def create
+    group_id = Time.now.to_i
+    
+    while Order.find_by(:group_id => group_id)
+      group_id = Time.now.to_i + 123
+    end
+
     @tour_guide_ids = params[:order][:tour_guide_ids].reject {|e| e.blank?}
 
     for tour_guide_id in @tour_guide_ids
       @user = current_user
       @order = @user.orders.create(order_params)
       @order.tour_guide_id = tour_guide_id
+      @order.group_id = group_id
       @order.save!
 
       if !@order.save!
@@ -60,9 +67,17 @@ class OrdersController < ApplicationController
   end
 
   def update
-    if @order.update(order_params)
+    if params[:order] && @order.update(order_params)
       flash[:notice] = "更新成功!"
       redirect_to user_orders_path(@user)
+    
+    elsif params[:status] && params[:status] == "accept"
+      @order.status =  "accept"
+      @order.save!
+      group_id = @order.group_id
+      orders = Order.where(:group_id => group_id, :status => nil)
+      orders.update_all(:status => "cancel")
+      redirect_to user_order_path(@user,@order, :role=>"tour-guide")
     else
       render "edit"
     end
@@ -76,7 +91,7 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:user_id, :tour_guide_id, :finished,
-                                  :contacted, :user_prefer_date, 
+                                  :user_prefer_date, 
                                   :final_date, :user_prefer_place,
                                   :final_place, :note, 
                                   :country, :phone_number,

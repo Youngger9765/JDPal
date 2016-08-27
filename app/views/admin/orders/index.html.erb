@@ -12,7 +12,7 @@ Orders
         <td>prefer place</td>
         <td>final_date</td>
         <td>final_place</td>
-        <td>contacted</td>
+        <td>status</td>
         <td>finished</td>
       </tr>
       <% @orders.each do |order|%>
@@ -27,7 +27,7 @@ Orders
           <td><%= order.user_prefer_place%></td>
           <td><%= order.final_date%></td>
           <td><%= order.final_place%></td>
-          <td><%= order.contacted%></td>
+          <td><%= order.status%></td>
           <td><%= order.finished%></td>
         </tr>
       <%end%>
