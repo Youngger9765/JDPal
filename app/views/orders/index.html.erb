@@ -15,6 +15,7 @@
           <td>status</td>
           <td>finished</td>
           <td>Edit</td>
+          <td>Cancel</td>
         </tr>
         <% @orders.each do |order|%>
           <tr 
@@ -37,6 +38,8 @@
             <td><%= order.status%></td>
             <td><%= order.finished%></td>
             <td><%= link_to "Edit", edit_user_order_path(current_user,order), :class => "btn btn-success btn-sm"%></td>
+            <td><%= link_to "cancel", user_order_path(current_user, order, :status =>"cancel"),:class => "btn btn-danger btn-sm", data: { confirm: "Do you really want to cancel this request?" }, :method => "PATCH"%>
+            </td>
           </tr>
         <%end%>
       </table> 

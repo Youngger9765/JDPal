@@ -74,6 +74,7 @@ class OrdersController < ApplicationController
       flash[:notice] = "更新成功!"
       redirect_to user_orders_path(@user)
     
+    # ACCEPT
     elsif params[:status] && params[:status] == "accept"
       group_id = @order.group_id
 
@@ -98,6 +99,7 @@ class OrdersController < ApplicationController
         redirect_to user_order_path(@user,@order, :role=>"tour-guide")
       end
     
+    # REJECT
     elsif params[:status] && @order.status == "accept" && params[:status] == "reject"
       flash[:notice] = "此訂單已拒絕!"
       @order.status =  "reject"
@@ -108,6 +110,12 @@ class OrdersController < ApplicationController
       orders.update_all(:status => nil)
 
       redirect_to user_order_path(@user,@order, :role=>"tour-guide")
+
+    # CANCEL
+    elsif params[:status] && params[:status] == "cancel"
+      @order.status =  "cancel"
+      @order.save!
+      redirect_to user_orders_path(@user)
     else
       render "edit"
     end
