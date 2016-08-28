@@ -4,7 +4,7 @@ class OrdersController < ApplicationController
 
   before_action :authenticate_user!
   before_action :find_user
-  before_action :find_order, only: [:show, :edit, :update]
+  before_action :find_order, only: [:show, :edit, :update, :checked_order]
 
   def index
     @orders = @user.orders
@@ -42,12 +42,19 @@ class OrdersController < ApplicationController
   end
 
   def create
+    group_id = Time.now.to_i
+    
+    while Order.find_by(:group_id => group_id)
+      group_id = Time.now.to_i + 123
+    end
+
     @tour_guide_ids = params[:order][:tour_guide_ids].reject {|e| e.blank?}
 
     for tour_guide_id in @tour_guide_ids
       @user = current_user
       @order = @user.orders.create(order_params)
       @order.tour_guide_id = tour_guide_id
+      @order.group_id = group_id
       @order.save!
 
       if !@order.save!
@@ -56,13 +63,46 @@ class OrdersController < ApplicationController
     end 
 
     redirect_to events_path
-
   end
 
   def update
-    if @order.update(order_params)
+    if params[:order] && @order.update(order_params)
       flash[:notice] = "更新成功!"
       redirect_to user_orders_path(@user)
+    
+    elsif params[:status] && params[:status] == "accept"
+      group_id = @order.group_id
+
+      if @order.status == "accept"
+        flash[:alert] = "此訂單已接受!"
+        redirect_to user_order_path(@user,@order, :role=>"tour-guide")
+
+      elsif Order.where(:group_id => group_id, :status => "accept").size == 0
+        @order.status =  "accept"
+        @order.save!
+
+        comment = "We already got your request! Please wait for our partners checking."
+        UserMailer.notify_comment(current_user, comment).deliver
+        
+        Order.where(:group_id => group_id, :status => nil).update_all(:status => "no-request")
+        Order.where(:group_id => group_id, :status => "").update_all(:status => "no-request")
+
+        redirect_to user_order_path(@user,@order, :role=>"tour-guide")
+      else
+        flash[:alert] = "此訂單已取消!"
+        redirect_to user_order_path(@user,@order, :role=>"tour-guide")
+      end
+    
+    elsif params[:status] && @order.status == "accept" && params[:status] == "reject"
+      flash[:notice] = "此訂單已拒絕!"
+      @order.status =  "reject"
+      @order.save!
+
+      group_id = @order.group_id
+      orders = Order.where(:group_id => group_id, :status => "no-request")
+      orders.update_all(:status => nil)
+
+      redirect_to user_order_path(@user,@order, :role=>"tour-guide")
     else
       render "edit"
     end
@@ -76,7 +116,7 @@ class OrdersController < ApplicationController
 
   def order_params
     params.require(:order).permit(:user_id, :tour_guide_id, :finished,
-                                  :contacted, :user_prefer_date, 
+                                  :user_prefer_date, 
                                   :final_date, :user_prefer_place,
                                   :final_place, :note, 
                                   :country, :phone_number,

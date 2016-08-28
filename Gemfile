@@ -58,6 +58,7 @@ group :development, :test do
   gem 'byebug'
   gem 'mailcatcher'
   gem 'better_errors'
+  gem "letter_opener"
 end
 
 group :development do
