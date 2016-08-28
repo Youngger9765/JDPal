@@ -80,9 +80,12 @@ class OrdersController < ApplicationController
       elsif Order.where(:group_id => group_id, :status => "accept").size == 0
         @order.status =  "accept"
         @order.save!
+
+        comment = "We already got your request! Please wait for our partners checking."
+        UserMailer.notify_comment(current_user, comment).deliver
         
-        orders = Order.where(:group_id => group_id, :status => (nil || ""))
-        orders.update_all(:status => "no-request")
+        Order.where(:group_id => group_id, :status => nil).update_all(:status => "no-request")
+        Order.where(:group_id => group_id, :status => "").update_all(:status => "no-request")
 
         redirect_to user_order_path(@user,@order, :role=>"tour-guide")
       else
