@@ -9,7 +9,7 @@ development:
 production:
   address: "smtp.gmail.com"
   port: 587"
-  domain: "gmail.com"
+  domain: "heroku.com"
   authentication: "plain"
   user_name: "jdpalservice@gmail.com"
   password: "jdpal2016"
