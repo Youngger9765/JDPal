@@ -34,6 +34,10 @@
         <% if !@order.status || (@order.status =="")%>
             <h1><%= link_to "Accept", user_order_path(@user, @order, :status =>"accept"),:class => "btn btn-success btn-lg", data: { confirm: "We will send this confirmed mail to traveller. Do you already checked out the detail?" }, :method => "PATCH"%>
             </h1>
+        <% elsif @order.status =="accept"%>
+            <h1><%= link_to "Reject", user_order_path(@user, @order, :status =>"reject"),:class => "btn btn-danger btn-lg", data: { confirm: "We will send this rejected mail to traveller. Would you already want to reject this request?" }, :method => "PATCH"%>
+            </h1>
+
         <%end%>
     <% end%>
   </div>

@@ -63,7 +63,6 @@ class OrdersController < ApplicationController
     end 
 
     redirect_to events_path
-
   end
 
   def update
@@ -72,11 +71,34 @@ class OrdersController < ApplicationController
       redirect_to user_orders_path(@user)
     
     elsif params[:status] && params[:status] == "accept"
-      @order.status =  "accept"
-      @order.save!
       group_id = @order.group_id
-      orders = Order.where(:group_id => group_id, :status => nil)
-      orders.update_all(:status => "cancel")
+
+      if @order.status == "accept"
+        flash[:alert] = "此訂單已接受!"
+        redirect_to user_order_path(@user,@order, :role=>"tour-guide")
+
+      elsif Order.where(:group_id => group_id, :status => "accept").size == 0
+        @order.status =  "accept"
+        @order.save!
+        
+        orders = Order.where(:group_id => group_id, :status => (nil || ""))
+        orders.update_all(:status => "no-request")
+
+        redirect_to user_order_path(@user,@order, :role=>"tour-guide")
+      else
+        flash[:alert] = "此訂單已取消!"
+        redirect_to user_order_path(@user,@order, :role=>"tour-guide")
+      end
+    
+    elsif params[:status] && @order.status == "accept" && params[:status] == "reject"
+      flash[:notice] = "此訂單已拒絕!"
+      @order.status =  "reject"
+      @order.save!
+
+      group_id = @order.group_id
+      orders = Order.where(:group_id => group_id, :status => "no-request")
+      orders.update_all(:status => nil)
+
       redirect_to user_order_path(@user,@order, :role=>"tour-guide")
     else
       render "edit"
