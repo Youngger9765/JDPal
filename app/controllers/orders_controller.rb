@@ -60,7 +60,11 @@ class OrdersController < ApplicationController
       if !@order.save!
         redirect_to :new
       end
-    end 
+    end
+
+    traveler = current_user
+    comment = "We already got your request and will contact with our partner as soon as possible. Please wait a while and thanks for your patient."
+    UserMailer.notice_mail(traveler, comment).deliver
 
     redirect_to events_path
   end
@@ -81,8 +85,9 @@ class OrdersController < ApplicationController
         @order.status =  "accept"
         @order.save!
 
-        comment = "We already got your request! Please wait for our partners checking."
-        UserMailer.notify_comment(current_user, comment).deliver
+        traveler = @order.user
+        comment = current_user.name + "already ACCEPT your request! Wish you have a nice trip."
+        UserMailer.accept_mail(traveler, comment).deliver
         
         Order.where(:group_id => group_id, :status => nil).update_all(:status => "no-request")
         Order.where(:group_id => group_id, :status => "").update_all(:status => "no-request")

@@ -5,9 +5,15 @@ class UserMailer < ApplicationMailer
   #
   #   en.user_mailer.notify_comment.subject
   #
-  def notify_comment(user, comment)
+  def notice_mail(user, comment)
     @comment = comment
     @user = user
-    mail(:to => user.email, :subject => "We got your request!")
+    mail(:to => user.email, :subject => "Request Accept!")
+  end
+
+  def accept_mail(user, comment)
+    @comment = comment
+    @user = user
+    mail(:to => user.email, :subject => "Request Accept!")
   end
 end
