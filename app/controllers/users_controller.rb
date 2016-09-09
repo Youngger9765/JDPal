@@ -43,6 +43,10 @@ class UsersController < ApplicationController
   def destroy
   end
 
+  def become_a_local_pal
+    
+  end
+
   private
 
   def find_user
