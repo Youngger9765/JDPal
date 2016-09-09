@@ -135,7 +135,7 @@ class OrdersController < ApplicationController
                                   :country, :phone_number,
                                   :name, :email, :language, :people_count,
                                   :request_days, :purpose, :others,
-                                  :skype_id, :gender, :birthday,
+                                  :social_media_id, :gender, :birthday,
                                   :interest_ids =>[],
                                 )
   end

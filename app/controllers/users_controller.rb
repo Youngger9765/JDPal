@@ -55,7 +55,7 @@ class UsersController < ApplicationController
                                  :availability, :travel_footprints,
                                  :familiar_areas, :facebook_url, 
                                  :country, :phone_number, :birthday, :gender,
-                                 :skype_id,
+                                 :social_media_id,
                                  :interest_ids =>[],
                                  :language_ids =>[],
                                 )
