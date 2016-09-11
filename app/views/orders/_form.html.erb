@@ -26,10 +26,11 @@
   <%= f.number_field :people_count, :class => "form-control", value: 1 %>
 </div>
 
-<!-- Skype ID -->
+<!-- social_media_id -->
 <div class="form-group">
-  <h3><%= f.label :skype_id ,"Skype Id"%><span style="color: red;">*</span></h3>  
-  <%= f.text_field :skype_id, :class => "form-control", value: @user.skype_id %>
+  <h3><%= f.label :social_media_id ,"Social_Media & ID"%>
+  <h4>(ex: Skype-Jason_example, whatapp-may1234)</h4>
+  <%= f.text_field :social_media_id, :class => "form-control", value: @user.social_media_id %>
 </div>
 
 <div class="form-group">

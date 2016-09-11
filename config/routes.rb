@@ -4,10 +4,16 @@ Rails.application.routes.draw do
 
   root 'events#index'
 
-  resources :events
+  resources :events do
+    
+  end
 
   resources :users do
     resources :orders
+
+    member do
+      get :become_a_local_pal
+    end
   end
 
   namespace :admin do
