@@ -30,6 +30,7 @@ set :deploy_to, '/home/deploy/jdpal'
 # append :linked_files, 'config/database.yml', 'config/secrets.yml'
 set :linked_files, fetch(:linked_files, []).push( 'config/database.yml',
                                                   'config/secrets.yml',
+                                                  'config/email.yml',
                                                   'config/facebook.yml')
 
 
