@@ -39,15 +39,15 @@ gem "font-awesome-rails"
 # gem 'unicorn'
 
 # Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
+gem 'capistrano-rails', :group => :development
+gem 'capistrano-passenger', :group => :development
 
-
-group :production do 
-  gem 'pg' 
+group :production do
+  gem 'mysql2', '~> 0.3.20'
   gem 'rails_12factor'
 end
 
-group :development, :test do 
+group :development, :test do
   gem 'mysql2', '~> 0.3.20'
 end
 
